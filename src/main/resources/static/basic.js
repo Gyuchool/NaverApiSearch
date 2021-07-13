@@ -50,7 +50,7 @@ function execSearch() {
     // 2. 검색창 입력값을 검사하고, 입력하지 않았을 경우 focus.
     if(query == ''){
         alert("검색어를 입력해주세요.");
-        $('query').focus();
+        $('#query').focus();
     }
     // 3. GET /api/search?query=${query} 요청
     $.ajax({
@@ -120,13 +120,45 @@ function showProduct() {
      * 관심상품 HTML 만드는 함수: addProductItem
      */
     // 1. GET /api/products 요청
-    // 2. 관심상품 목록, 검색결과 목록 비우기
-    // 3. for 문마다 관심 상품 HTML 만들어서 관심상품 목록에 붙이기!
+    $.ajax({
+        type:'GET',
+        url:'api/products',
+        success: function (response){
+            // 2. 관심상품 목록, 검색결과 목록 비우기
+            $('#product-container').empty();
+            $('#search-result-box').empty();
+            // 3. for 문마다 관심 상품 HTML 만들어서 관심상품 목록에 붙이기!
+            for(let i=0; i<response.length; i++){
+                let product = response[i];
+                let tempHtml = addProductItem(product);
+                $('#product-container').append(tempHtml);
+            }
+        }
+
+    })
+
+
 }
 
 function addProductItem(product) {
     // link, image, title, lprice, myprice 변수 활용하기
-    return ``;
+    return `<div class="product-card" onclick="window.location.href='${product.link}'">
+            <div class="card-header">
+                <img src="${product.image}"
+                     alt="">
+            </div>
+            <div class="card-body">
+                <div class="title">
+                    ${product.title}
+                </div>
+                <div class="lprice">
+                    <span>${numberWithCommas(product.lprice)}</span>원
+                </div>
+                <div class="isgood ${product.lprice <= product.myprice ? '' : 'none'}"> <!-- 출력 하거나 none으로 출력 안하거나-->
+                    최저가
+                </div>
+            </div>
+        </div>`;
 }
 
 function setMyprice() {
