@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 *.yml
 src/main/java/com/springshop/naverapi/utils/NaverShopSearch.java
-
+src/main/generated
 ### STS ###
 .apt_generated
 .classpath

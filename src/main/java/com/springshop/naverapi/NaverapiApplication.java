@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableJpaAuditing
 @SpringBootApplication
 public class NaverapiApplication {
-    //main
+
     public static void main(String[] args) {
         SpringApplication.run(NaverapiApplication.class, args);
     }
