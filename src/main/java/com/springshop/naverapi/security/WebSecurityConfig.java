@@ -2,6 +2,7 @@ package com.springshop.naverapi.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -9,10 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
+@EnableGlobalMethodSecurity(securedEnabled = true)//@Secured("ROLE_ADMIN")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder encodePassword() {
         return new BCryptPasswordEncoder();
     }
 
@@ -20,11 +22,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.headers().frameOptions().disable();
-
         http.authorizeRequests()
                 // image 폴더를 login 없이 허용
-                // css 폴더를 login 없이 허용 //ignore 로 구현도 가능
-                .antMatchers("/images/**", "/css/**","/user/**", "/h2-console/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                // css 폴더를 login 없이 허용
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/user/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 // 그 외 모든 요청은 인증과정 필요
                 .anyRequest().authenticated()
                 .and()
@@ -36,7 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/user/logout")
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/user/forbidden");
     }
-
 }
