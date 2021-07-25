@@ -1,8 +1,8 @@
 package com.springshop.naverapi.utils;
 
-import com.springshop.naverapi.models.ItemDto;
+import com.springshop.naverapi.dto.ItemDto;
 import com.springshop.naverapi.models.Product;
-import com.springshop.naverapi.models.ProductRepository;
+import com.springshop.naverapi.repository.ProductRepository;
 import com.springshop.naverapi.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

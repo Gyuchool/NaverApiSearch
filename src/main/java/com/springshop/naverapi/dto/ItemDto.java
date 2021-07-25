@@ -1,4 +1,4 @@
-package com.springshop.naverapi.models;
+package com.springshop.naverapi.dto;
 
 import lombok.Getter;
 import org.json.JSONObject;

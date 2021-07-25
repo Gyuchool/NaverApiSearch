@@ -1,5 +1,8 @@
 package com.springshop.naverapi.models;
 
+import com.springshop.naverapi.dto.ItemDto;
+import com.springshop.naverapi.dto.ProductMypriceRequestDto;
+import com.springshop.naverapi.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

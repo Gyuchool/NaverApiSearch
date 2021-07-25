@@ -1,9 +1,9 @@
 package com.springshop.naverapi.controller;
 
 import com.springshop.naverapi.models.Product;
-import com.springshop.naverapi.models.ProductMypriceRequestDto;
-import com.springshop.naverapi.models.ProductRepository;
-import com.springshop.naverapi.models.ProductRequestDto;
+import com.springshop.naverapi.dto.ProductMypriceRequestDto;
+import com.springshop.naverapi.repository.ProductRepository;
+import com.springshop.naverapi.dto.ProductRequestDto;
 import com.springshop.naverapi.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

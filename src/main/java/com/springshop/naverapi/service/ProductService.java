@@ -1,14 +1,13 @@
 package com.springshop.naverapi.service;
 
-import com.springshop.naverapi.models.ItemDto;
+import com.springshop.naverapi.dto.ItemDto;
 import com.springshop.naverapi.models.Product;
-import com.springshop.naverapi.models.ProductMypriceRequestDto;
-import com.springshop.naverapi.models.ProductRepository;
+import com.springshop.naverapi.dto.ProductMypriceRequestDto;
+import com.springshop.naverapi.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @RequiredArgsConstructor // final로 선언된 멤버 변수를 자동으로 생성합니다.
 @Service // 서비스임을 선언합니다.

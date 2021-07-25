@@ -1,6 +1,6 @@
 package com.springshop.naverapi.controller;
 
-import com.springshop.naverapi.models.ItemDto;
+import com.springshop.naverapi.dto.ItemDto;
 import com.springshop.naverapi.utils.NaverShopSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
