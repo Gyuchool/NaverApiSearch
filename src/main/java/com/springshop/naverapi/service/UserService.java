@@ -4,6 +4,7 @@ import com.springshop.naverapi.dto.SignupRequestDto;
 import com.springshop.naverapi.models.User;
 import com.springshop.naverapi.models.UserRole;
 import com.springshop.naverapi.repository.UserRepository;
+import com.springshop.naverapi.security.UserDetailsImpl;
 import com.springshop.naverapi.security.kakao.KakaoOAuth2;
 import com.springshop.naverapi.security.kakao.KakaoUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,11 +65,6 @@ public class UserService {
         String nickname = userInfo.getNickname();
         String email = userInfo.getEmail();
 
-        // 우리 DB 에서 회원 Id 와 패스워드
-        // 회원 Id = 카카오 nickname
-        String username = nickname;
-        // 패스워드 = 카카오 Id + ADMIN TOKEN
-        String password = kakaoId + ADMIN_TOKEN;
 
         // DB 에 중복된 Kakao Id 가 있는지 확인
         User kakaoUser = userRepository.findByKakaoId(kakaoId)
@@ -76,18 +72,34 @@ public class UserService {
 
         // 카카오 정보로 회원가입
         if (kakaoUser == null) {
-            // 패스워드 인코딩
-            String encodedPassword = passwordEncoder.encode(password);
-            // ROLE = 사용자
-            UserRole role = UserRole.USER;
+            User user = userRepository.findByEmail(email).orElse(null);
+            if(user == null){
 
-            kakaoUser = new User(nickname, encodedPassword, email, role, kakaoId);
-            userRepository.save(kakaoUser);
+                // 우리 DB 에서 회원 Id 와 패스워드
+                // 회원 Id = 카카오 nickname
+                String username = nickname;
+                // 패스워드 = 카카오 Id + ADMIN TOKEN
+                String password = kakaoId + ADMIN_TOKEN;
+
+                // 패스워드 인코딩
+                String encodedPassword = passwordEncoder.encode(password);
+                // ROLE = 사용자
+                UserRole role = UserRole.USER;
+
+                kakaoUser = new User(nickname, encodedPassword, email, role, kakaoId);
+                userRepository.save(kakaoUser);
+
+            }
+            else{
+                kakaoUser = user;
+                kakaoUser.setKakaoId(kakaoId);
+                userRepository.save(kakaoUser);
+            }
         }
 
         // 로그인 처리
-        Authentication kakaoUsernamePassword = new UsernamePasswordAuthenticationToken(username, password);
-        Authentication authentication = authenticationManager.authenticate(kakaoUsernamePassword);
+        UserDetailsImpl userDetails = new UserDetailsImpl(kakaoUser);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
