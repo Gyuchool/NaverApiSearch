@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ProductRequestDto {
     private String title;
-    private String link;
     private String image;
+    private String link;
     private int lprice; //최저가
 }
