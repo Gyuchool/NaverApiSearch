@@ -9,12 +9,10 @@ import com.springshop.naverapi.models.UserRole;
 import com.springshop.naverapi.service.ProductService;
 import com.springshop.naverapi.service.UserService;
 import org.junit.jupiter.api.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,20 +25,21 @@ public class UserProductIntegrationTest {
     UserService userService;
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     ProductService productService;
 
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    Product createdProduct = null;
     Long userId = null;
+    Product createdProduct = null;
     int updatedMyPrice = -1;
 
     @Test
     @Order(1)
-    public void 회원가입전_관심상품_등록() throws Exception {
-        //given
+    @DisplayName("회원 가입 정보 없이 상품 등록 시 에러발생")
+    void test1() {
+        // given
         String title = "Apple <b>에어팟</b> 2세대 유선충전 모델 (MV7N2KH/A)";
         String imageUrl = "https://shopping-phinf.pstatic.net/main_1862208/18622086330.20200831140839.jpg";
         String linkUrl = "https://search.shopping.naver.com/gate.nhn?id=18622086330";
@@ -51,21 +50,22 @@ public class UserProductIntegrationTest {
                 linkUrl,
                 lPrice
         );
+
         // when
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             productService.createProduct(requestDto, userId);
         });
-        //then
-        assertEquals("회원 Id 가 유효하지 않습니다.", illegalArgumentException.getMessage());
-    }
 
+        // then
+        assertEquals("회원 Id 가 유효하지 않습니다.", exception.getMessage());
+    }
 
     @Test
     @Order(2)
     @DisplayName("회원 가입")
     void test2() {
         // given
-        String username = "르탄이";
+        String username = "르탄이1";
         String password = "nobodynoboy";
         String email = "retan1@spartacodingclub.kr";
         boolean admin = false;
@@ -109,7 +109,7 @@ public class UserProductIntegrationTest {
         Product product = productService.createProduct(requestDto, userId);
 
         // then
-        assertNotNull(product.getId());         //회원 저장되었는지
+        assertNotNull(product.getId());
         assertEquals(userId, product.getUserId());
         assertEquals(title, product.getTitle());
         assertEquals(imageUrl, product.getImage());
@@ -145,8 +145,14 @@ public class UserProductIntegrationTest {
     @DisplayName("회원이 등록한 모든 관심상품 조회")
     void test5() {
         // given
+        int page = 0;
+        int size = 10;
+        String sortBy = "id";
+        boolean isAsc = false;
+
         // when
-        List<Product> productList = productService.getProducts(userId);
+        Page<Product> productList = productService.getProducts(userId, page, size, sortBy, isAsc);
+
         // then
         // 1. 전체 상품에서 테스트에 의해 생성된 상품 찾아오기 (상품의 id 로 찾음)
         Long createdProductId = this.createdProduct.getId();
@@ -165,6 +171,4 @@ public class UserProductIntegrationTest {
         // 3. Order(2) 테스트에 의해 myPrice 가격이 정상적으로 업데이트되었는지 검증
         assertEquals(this.updatedMyPrice, foundProduct.getMyprice());
     }
-
-
 }
