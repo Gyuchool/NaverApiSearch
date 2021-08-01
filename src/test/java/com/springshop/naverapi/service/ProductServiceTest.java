@@ -3,6 +3,7 @@ package com.springshop.naverapi.service;
 import com.springshop.naverapi.dto.ProductMypriceRequestDto;
 import com.springshop.naverapi.dto.ProductRequestDto;
 import com.springshop.naverapi.models.Product;
+import com.springshop.naverapi.repository.FolderRepository;
 import com.springshop.naverapi.repository.ProductRepository;
 import com.springshop.naverapi.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
@@ -19,9 +20,11 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
-
     @Mock
     ProductRepository productRepository;
+
+    @Mock
+    FolderRepository folderRepository;
 
     @Test
     @DisplayName("updateProduct() 에 의해 관심 가격이 3만원으로 변경되는지 확인")
@@ -44,7 +47,7 @@ class ProductServiceTest {
 
         Product product = new Product(requestProductDto, userId);
 
-        ProductService productService = new ProductService(productRepository);
+        ProductService productService = new ProductService(productRepository, folderRepository);
         when(productRepository.findById(productId))
                 .thenReturn(Optional.of(product));
 
@@ -76,7 +79,7 @@ class ProductServiceTest {
 
         Product product = new Product(requestProductDto, userId);
 
-        ProductService productService = new ProductService(productRepository);
+        ProductService productService = new ProductService(productRepository, folderRepository);
         when(productRepository.findById(productId))
                 .thenReturn(Optional.of(product));
 
