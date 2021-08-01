@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //초기에 테스트 위한 데이터 생성
-@Component
+//@Component
 public class TestDataRunner implements ApplicationRunner {
 
     @Autowired
