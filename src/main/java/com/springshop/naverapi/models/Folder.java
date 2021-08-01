@@ -26,7 +26,7 @@ public class Folder extends Timestamped {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(nullable = false)
     private User user;
 }

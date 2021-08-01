@@ -1,21 +1,21 @@
 package com.springshop.naverapi.models;
 
 import com.springshop.naverapi.dto.ItemDto;
-import com.springshop.naverapi.dto.ProductMypriceRequestDto;
 import com.springshop.naverapi.dto.ProductRequestDto;
+import com.springshop.naverapi.models.Folder;
+import com.springshop.naverapi.models.Timestamped;
 import com.springshop.naverapi.utils.URLValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import java.util.List;
 
-@Getter // get 함수를 일괄적으로 만들어줍니다.
 @Setter
+@Getter // get 함수를 일괄적으로 만들어줍니다.
 @NoArgsConstructor // 기본 생성자를 만들어줍니다.
 @Entity // DB 테이블 역할을 합니다.
-public class Product extends Timestamped{
-
+public class Product extends Timestamped {
     // ID가 자동으로 생성 및 증가합니다.
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -39,6 +39,9 @@ public class Product extends Timestamped{
 
     @Column(nullable = false)
     private Long userId;
+
+    @ManyToMany
+    private List<Folder> folderList;
 
     public Product(ProductRequestDto requestDto, Long userId) {
         // 입력값 Validation
@@ -71,15 +74,16 @@ public class Product extends Timestamped{
         this.myprice = 0;
     }
 
-    public void updateByItemDto(ItemDto itemDto){
-        this.lprice = itemDto.getLprice();
-    }
-    // 관심 가격 변경 시 이용합니다.
-    public void update(ProductMypriceRequestDto requestDto) {
-        this.myprice = requestDto.getMyprice();
+    // 관심 상품의 가격 변경 시 사용합니다.
+    public void updateMyPrice(int price) {
+        this.myprice = price;
     }
 
-    public void updateMyPrice(int myPrice) {
-        this.myprice=myPrice;
+    public void addFolder(Folder folder) {
+        this.folderList.add(folder);
+    }
+
+    public void updateByItemDto(ItemDto itemDto){
+        this.lprice = itemDto.getLprice();
     }
 }
