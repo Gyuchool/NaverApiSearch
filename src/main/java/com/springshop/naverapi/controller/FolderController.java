@@ -1,12 +1,15 @@
 package com.springshop.naverapi.controller;
 
 import com.springshop.naverapi.dto.FolderCreateRequestDto;
+import com.springshop.naverapi.exception.ApiException;
 import com.springshop.naverapi.models.Folder;
 import com.springshop.naverapi.models.Product;
 import com.springshop.naverapi.security.UserDetailsImpl;
 import com.springshop.naverapi.service.FolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -32,6 +35,7 @@ public class FolderController {
     @PostMapping("/api/folders")
     public List<Folder> addFolders(@RequestBody FolderCreateRequestDto folderCreateRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         List<String> folderNames = folderCreateRequestDto.getFolderNames();
+
         return folderService.createFolders(folderNames, userDetails.getUser());
     }
 
