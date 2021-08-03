@@ -36,6 +36,7 @@ public class UserTimeAop {
             // 수행시간 = 종료 시간 - 시작 시간
             long runTime = endTime - startTime;
             // 로그인 회원이 없는 경우, 수행시간 기록하지 않음
+
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (auth != null && auth.getPrincipal().getClass() == UserDetailsImpl.class) {
                 // 로그인 회원 -> loginUser 변수
@@ -46,12 +47,17 @@ public class UserTimeAop {
                 UserTime userTime = userTimeRepository.findByUser(loginUser);
                 if (userTime != null) {
                     // 로그인 회원의 기록이 있으면
+
                     long totalTime = userTime.getTotalTime();
                     totalTime = totalTime + runTime;
-                    userTime.updateTotalTime(totalTime);
+
+                    //api 수행 횟수
+                    long numberOfcall = userTime.getNumberOfCall();
+                    numberOfcall++;
+                    userTime.updateTotalTime(totalTime,numberOfcall);
                 } else {
                     // 로그인 회원의 기록이 없으면
-                    userTime = new UserTime(loginUser, runTime);
+                    userTime = new UserTime(loginUser, runTime, 1L);
                 }
 
                 System.out.println("[User Time] User: " + userTime.getUser().getUsername() + ", Total Time: " + userTime.getTotalTime() + " ms");
@@ -59,4 +65,5 @@ public class UserTimeAop {
             }
         }
     }
+
 }

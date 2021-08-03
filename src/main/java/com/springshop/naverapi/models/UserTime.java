@@ -24,12 +24,18 @@ public class UserTime {
     @Column(nullable = false)
     private long totalTime;
 
-    public UserTime(User user, long totalTime) {
+    @Column(nullable = false, columnDefinition = "bigint default 0") //중간에 추가되므로 이미 만들어진 테이블에서
+    //count를 0부터 시작하겠다, nullable false이므로
+    private long numberOfCall;
+
+    public UserTime(User user, long totalTime, long numberOfCall) {
         this.user = user;
         this.totalTime = totalTime;
+        this.numberOfCall = numberOfCall;
     }
 
-    public void updateTotalTime(long totalTime) {
+    public void updateTotalTime(long totalTime, long numberOfCall) {
         this.totalTime = totalTime;
+        this.numberOfCall = numberOfCall;
     }
 }
