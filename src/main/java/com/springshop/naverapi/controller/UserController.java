@@ -5,6 +5,7 @@ import com.springshop.naverapi.models.User;
 import com.springshop.naverapi.models.UserRole;
 import com.springshop.naverapi.repository.UserRepository;
 import com.springshop.naverapi.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 @Controller
@@ -61,7 +64,6 @@ public class UserController {
 
         return "redirect:/";
     }
-
 
     /* 테스트 용도 */
 
@@ -210,7 +212,6 @@ public class UserController {
         System.out.println(user1.getEmail());
         System.out.println(user1.getRole());
 
-        // TODO: DB 에서 테스트 회원 "user1" 데이터 삭제 꼭 직접 해 주세요~!!
     }
 
     private void createTestUser1() {

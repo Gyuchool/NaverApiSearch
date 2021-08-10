@@ -295,3 +295,88 @@ function setMyprice() {
         }
     })
 }
+
+function emailSend(){
+    let clientEmail = document.getElementById("emailText").value;
+    let emailYN = isEmail(clientEmail);
+
+    console.log('입력 이메일' + clientEmail);
+
+    if(emailYN === true){
+        alert('이메일 형식입니다.');
+
+        $.ajax({
+            type:"POST",
+            url:"/api/user/email",
+            data:{userEmail:clientEmail},
+            success : function (data){},
+            error:function (e){
+                alert('오류입니다. 잠시 후 다시 시도해주세요.');
+            }
+        });
+    }else{
+        alert('이메일 형식에 알맞게 입력해주세요 ex@xxx.com');
+    }
+}
+
+function isEmail(asValue){
+    var reg = new RegExp("^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}/i");
+    return reg.test(asValue); //형식에 맞는 경우 true 리턴
+}
+
+function emailCertification(){
+    let clientEmail = document.getElementById("emailText").vale;
+    let inputCode = document.getElementById("certificationNumber").value;
+
+    console.log('이메일' + clientEmail);
+    console.log('인증코드' + inputCode);
+
+    $.ajax({
+        type:'POST',
+        url:"/api/user/email/certification",
+        data:{userEmail: clientEmail, inputCode: inputCode},
+        success : function (response){
+            console.log(response);
+            if(response === true){
+                alert('인증 완료');
+                document.getElementById("certificationYN").value = "true";
+                clientEmail.onchange = function (){
+                    document.getElementById("certificationYN").value = "false";
+                }
+            }else{
+                alert('재시도');
+            }
+        }
+    });
+}
+
+$(".sendMail").click(function() {// 메일 입력 유효성 검사
+    var mail = $(".mail").val(); //사용자의 이메일 입력값.
+
+    if (mail == "") {
+        alert("메일 주소가 입력되지 않았습니다.");
+    } else {
+        mail = mail+"@"+$(".domain").val(); //셀렉트 박스에 @뒤 값들을 더함.
+        $.ajax({
+            type : 'post',
+            url : '/CheckMail',
+            data : {
+                mail:mail
+            },
+            dataType :'json',
+
+        });
+        alert("인증번호가 전송되었습니다.")
+        isCertification=true; //추후 인증 여부를 알기위한 값
+    }
+});
+
+$(".compare").on("propertychange change keyup paste input", function() {
+    if ($(".compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+        $(".compare-text").text("인증 성공!").css("color", "black");
+        isCertification = true;  //인증 성공여부 check
+    } else {
+        $(".compare-text").text("불일치!").css("color", "red");
+        isCertification = false; //인증 실패
+    }
+});

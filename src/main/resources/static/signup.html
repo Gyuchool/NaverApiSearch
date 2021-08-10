@@ -38,8 +38,22 @@
         <input type="password" name="password" class="login-input-box">
 
         <div class="login-id-label">E-mail</div>
-        <input type="text" name="email" placeholder="E-mail" class="login-input-box">
-
+        <input type="email" name="email" id="emailText" placeholder="E-mail" class="login-input-box">
+        <div>
+            <button id="emailCheck" onclick="emailSend()">인증번호 받기</button>
+        </div>
+        <div style="width: 100%; display: flex">
+            <div class = "forTextLabel">
+                인증번호
+            </div>
+        </div>
+        <div class="forText">
+            <input type="text" id ="certificationNumber">
+        </div>
+        <div>
+            <button id="certificationBtn" onclick="emailCertification()">인증하기</button>
+            <input type="hidden" id="certificationYN" value="false">
+        </div>
         <div>
             <input id="admin-check" type="checkbox" name="admin" onclick="onclickAdmin()" style="margin-top: 40px;">관리자
             <input id="admin-token" type="password" name="adminToken" placeholder="관리자 암호" class="login-input-box" style="display:none">

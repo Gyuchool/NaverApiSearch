@@ -5,6 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 *.yml
+*.sh
 src/main/java/com/springshop/naverapi/utils/NaverShopSearch.java
 src/main/java/com/springshop/naverapi/security/kakao/KakaoOAuth2.java
 src/main/generated
