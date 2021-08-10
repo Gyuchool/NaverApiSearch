@@ -28,3 +28,4 @@ Naver Api를 이용하여 제품들을 검색 후, 최저가를 설정하면 그
 ## 아이맥을 검색하여 결과가 나오고 담아두기 버튼으로 물건을 담아둘수 있다.
 ![image](https://user-images.githubusercontent.com/60054318/126171987-66aeb3a0-d7e4-4263-af2d-82dc1c919894.png)
 
+[![Build Status](https://travis-ci.com/Gyuchool/NaverApiSearch.svg?branch=main)](https://travis-ci.com/Gyuchool/NaverApiSearch)
