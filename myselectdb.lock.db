@@ -1,6 +1,6 @@
 #FileLock
-#Tue Aug 10 16:34:21 KST 2021
-server=172.31.16.1\:9249
+#Tue Aug 10 18:50:25 KST 2021
+server=172.31.16.1\:14893
 hostName=LAPTOP-4ISTD11D.mshome.net
 method=file
-id=17b2efbcdbd231dd9f994818e8764e76c6bc9c315f4
+id=17b2f786155dab19190dfbe17fc92f220695a6a045a
