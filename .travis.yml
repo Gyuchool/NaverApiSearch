@@ -16,44 +16,44 @@ before_install:
 
 script:
   - "./gradlew clean build"
-
-# before_deploy 과정에서 S3에 파일을 저장하고 EC2에 배포할 것들에 대해서 작성합니다.
-before_deploy:
-  - mkdir -p before-deploy # zip에 포함시킬 파일들을 담을 디렉토리 생성
-  - cp scripts/*.sh before-deploy/
- # - cp Dockerfile before-deploy/    # Dockerfile 디렉토리로 이동
-  - cp appspec.yml before-deploy/   # appspec.yml  디렉토리로 이동
-  - cp build/libs/*.jar before-deploy/  # jar 파일도 디렉토리로 이동
-  - cd before-deploy && zip -r before-deploy * # before-deploy로 이동후 전체 압축
-  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
-  - mv before-deploy/before-deploy.zip deploy/SpringBoot_naver-api.zip # deploy로 zip파일 이동
-
-deploy:
-  - provider: s3
-    access_key_id: $AWS_ACCESS_KEY         # Travis CI 에서 IAM 사용자 엑세스 키
-    secret_access_key: $AWS_SECRET_KEY     # Travis CI 에서 IAM 사용자 비밀 엑세스 키
-    bucket: giron-bucket      # S3 Bucket 이름
-    region: ap-northeast-2
-    skip_cleanup: true
-    acl: private
-    local_dir: deploy
-    wait-until-deployed: true
-    on:
-      all_branches: true
-
-  - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY        # Travis CI 에서 IAM 사용자 엑세스 키
-    secret_access_key: $AWS_SECRET_KEY    # Travis CI 에서 IAM 사용자 비밀 엑세스 키
-
-    bucket: giron-bucket        # S3 Bucket 이름
-    key: pringBoot_naver-api.zip
-    bundle_type: zip                 # zip 형태라는 걸 명시
-    application: Giron-Deploy            # CodeDeploy 애플리케이션 이름
-
-    deployment_group: Giron-Group   # CodeDeploy 배포 그룹 이름
-
-    region: ap-northeast-2
-    wait-until-deployed: true
+#
+## before_deploy 과정에서 S3에 파일을 저장하고 EC2에 배포할 것들에 대해서 작성합니다.
+#before_deploy:
+#  - mkdir -p before-deploy # zip에 포함시킬 파일들을 담을 디렉토리 생성
+#  - cp scripts/*.sh before-deploy/
+# # - cp Dockerfile before-deploy/    # Dockerfile 디렉토리로 이동
+#  - cp appspec.yml before-deploy/   # appspec.yml  디렉토리로 이동
+#  - cp build/libs/*.jar before-deploy/  # jar 파일도 디렉토리로 이동
+#  - cd before-deploy && zip -r before-deploy * # before-deploy로 이동후 전체 압축
+#  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
+#  - mv before-deploy/before-deploy.zip deploy/SpringBoot_naver-api.zip # deploy로 zip파일 이동
+#
+#deploy:
+#  - provider: s3
+#    access_key_id: $AWS_ACCESS_KEY         # Travis CI 에서 IAM 사용자 엑세스 키
+#    secret_access_key: $AWS_SECRET_KEY     # Travis CI 에서 IAM 사용자 비밀 엑세스 키
+#    bucket: giron-bucket      # S3 Bucket 이름
+#    region: ap-northeast-2
+#    skip_cleanup: true
+#    acl: private
+#    local_dir: deploy
+#    wait-until-deployed: true
+#    on:
+#      all_branches: true
+#
+#  - provider: codedeploy
+#    access_key_id: $AWS_ACCESS_KEY        # Travis CI 에서 IAM 사용자 엑세스 키
+#    secret_access_key: $AWS_SECRET_KEY    # Travis CI 에서 IAM 사용자 비밀 엑세스 키
+#
+#    bucket: giron-bucket        # S3 Bucket 이름
+#    key: pringBoot_naver-api.zip
+#    bundle_type: zip                 # zip 형태라는 걸 명시
+#    application: Giron-Deploy            # CodeDeploy 애플리케이션 이름
+#
+#    deployment_group: Giron-Group   # CodeDeploy 배포 그룹 이름
+#
+#    region: ap-northeast-2
+#    wait-until-deployed: true
 
 notification:
   email:
