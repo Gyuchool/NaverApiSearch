@@ -31,7 +31,7 @@ class ProductServiceTest {
     void updateProduct_Normal() {
         // given
         Long productId = 100L;
-        int myprice = 30000;
+        int myprice = 3000;
 
         ProductMypriceRequestDto requestMyPriceDto = new ProductMypriceRequestDto(
                 myprice
