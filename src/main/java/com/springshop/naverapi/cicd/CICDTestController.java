@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CICDTestController {
 
 
-    @GetMapping("/cd")
+    @GetMapping("/hello")
     public String set(){
         return "success!!";
     }
