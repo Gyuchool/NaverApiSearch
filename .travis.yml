@@ -1,22 +1,22 @@
-language: java
-jdk:
-  - openjdk11
-
-branches:
-  only:
-    - main
-
-# Travis CI 서버의 Home
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
-
-
-script: "./gradlew clean build"
-
-# C 실행 완료시 메일로 알람
-notifications:
-  email:
-    recipients:
-      - balance0591@naver.com
+#language: java
+#jdk:
+#  - openjdk11
+#
+#branches:
+#  only:
+#    - main
+#
+## Travis CI 서버의 Home
+#cache:
+#  directories:
+#    - '$HOME/.m2/repository'
+#    - '$HOME/.gradle'
+#
+#
+#script: "./gradlew clean build"
+#
+## C 실행 완료시 메일로 알람
+#notifications:
+#  email:
+#    recipients:
+#      - balance0591@naver.com
