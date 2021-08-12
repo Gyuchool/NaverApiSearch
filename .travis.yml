@@ -13,7 +13,9 @@ matrix:
           - '$HOME/.gradle'
 
       before_install:
+        - "./gradlew assemble"
         - chmod +x gradlew
+        - "./gradlew assemble"
 
       script: "./gradlew clean build"
 
