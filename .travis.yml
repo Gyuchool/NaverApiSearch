@@ -15,10 +15,11 @@ matrix:
       before_install:
         - "./gradlew assemble"
         - chmod +x gradlew
+
+
+      script:
+        - "./gradlew clean build"
         - "./gradlew assemble"
-
-      script: "./gradlew clean build"
-
       before_deploy:
         - mkdir -p before-deploy
         - cp scripts/*.sh before-deploy/
