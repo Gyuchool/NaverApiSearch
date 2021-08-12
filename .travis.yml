@@ -2,7 +2,7 @@ matrix:
   include:
     - language: java
       jdk:
-        - openjdk11
+        - openjdk8
       branches:
         only:
           - main
@@ -13,13 +13,10 @@ matrix:
           - '$HOME/.gradle'
 
       before_install:
-        - "./gradlew assemble"
         - chmod +x gradlew
 
+      script: "./gradlew clean build"
 
-      script:
-        - "./gradlew clean build"
-        - "./gradlew assemble"
       before_deploy:
         - mkdir -p before-deploy
         - cp scripts/*.sh before-deploy/
