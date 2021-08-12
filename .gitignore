@@ -5,8 +5,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 **/resources/*.yml
-**/aws/
 src/main/generated
+
 ### STS ###
 .apt_generated
 .classpath
