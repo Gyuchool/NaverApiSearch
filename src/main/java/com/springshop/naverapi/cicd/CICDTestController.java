@@ -10,6 +10,6 @@ public class CICDTestController {
 
     @GetMapping("/hello")
     public String set(){
-        return "success!!";
+        return "success!";
     }
 }
