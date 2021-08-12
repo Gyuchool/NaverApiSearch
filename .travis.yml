@@ -1,58 +1,21 @@
-matrix:
-  include:
-    - language: java
-      jdk:
-        - openjdk11
-      branches:
-        only:
-          - main
+language: java
+jdk:
+  - openjdk8
 
-      cache:
-        directories:
-          - '$HOME/.m2/repository'
-          - '$HOME/.gradle'
+branches:
+  only:
+    - main
 
-      before_install:
-        - chmod +x gradlew
+# Travis CI 서버의 Home
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
 
-      script: "./gradlew clean build"
 
-      before_deploy:
-        - mkdir -p before-deploy
-        - cp scripts/*.sh before-deploy/
-        - cp appspec.yml before-deploy/
-        - cp build/libs/*.jar before-deploy/
-        - cd before-deploy && zip -r before-deploy *
-        - cd ../ && mkdir -p deploy
-        - mv before-deploy/before-deploy.zip deploy/naver-api.zip
+script: "./gradlew clean build"
 
-      deploy:
-        - provider: s3
-          access_key_id: $AWS_ACCESS_KEY
-          secret_access_key: $AWS_SECRET_KEY
-          bucket: giron-bucket
-          region: ap-northeast-2
-          skip_cleanup: true
-          acl: private
-          local_dir: deploy
-          wait-until-deployed: true
-          on:
-            all_branches: true
-
-        - provider: codedeploy
-          access_key_id: $AWS_ACCESS_KEY
-          secret_access_key: $AWS_SECRET_KEY
-          bucket: giron-bucket
-          key: naver-api.zip # 빌드 파일 압축해서 전달
-
-          bundle_type: zip # 압축 확장자
-          application: Giron-Deploy # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
-          deployment_group: Giron-Group # 웹 콘솔에서 등록한 CodeDeploy 배포그룹
-          region: ap-northeast-2
-          wait-until-deployed: true
-          on:
-            all_branches: true
-
+# C 실행 완료시 메일로 알람
 notifications:
   email:
     recipients:
