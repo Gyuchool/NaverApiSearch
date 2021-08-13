@@ -12,16 +12,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class NaverapiApplication {
 
-    public static final String APPLICATION_LOCATIONS = "spring.config.location="
-            + "classpath:application.yml,"
-            + "classpath:mail.yml,"
-            + "classpath:aws.yml";
 
-
+        public static final String APPLICATION_LOCATIONS = "spring.config.location="
+                + "classpath:application.yml,"
+                + "classpath:application-aws.yml";
     public static void main(String[] args) {
-        new SpringApplicationBuilder(NaverapiApplication.class)
-                .properties(APPLICATION_LOCATIONS)
-                .run(args);
+
+            new SpringApplicationBuilder(NaverapiApplication.class)
+                    .properties(APPLICATION_LOCATIONS)
+                    .run(args);
+//         SpringApplication.run(NaverapiApplication.class, args);
     }
 
 }

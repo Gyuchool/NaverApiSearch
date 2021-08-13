@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@PropertySource("classpath:aws.yml")
 public class AmazonS3Config {
 
     @Value("${cloud.aws.credentials.access-key}")
@@ -23,7 +21,6 @@ public class AmazonS3Config {
     @Value("${cloud.aws.region.static}")
     private String region;
 
-
     @Bean
     public AmazonS3Client amazonS3Client(){
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
@@ -31,9 +28,5 @@ public class AmazonS3Config {
                 .withRegion(region)
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
-    }
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 }
