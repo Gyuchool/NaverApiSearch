@@ -1,5 +1,5 @@
 #!/bin bash
-BUILD_JAR=$(ls /home/ec2-user/jenkins/build/libs/*.jar)     # jar가 위치하는 곳
+BUILD_JAR=$(ls /home/ec2-user/app/*.jar)     # jar가 위치하는 곳
 JAR_NAME=$(basename $BUILD_JAR)
 echo "> build 파일명: $JAR_NAME" >> /home/ec2-user/deploy.log
 
