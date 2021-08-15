@@ -48,7 +48,7 @@ deploy:
       repo: Gyuchool/NaverApiSearch
       branch: main
 
-# 실행 완료시 메일로 알람
+#실행 완료시 메일로 알람
 notifications:
   email:
     recipients:
