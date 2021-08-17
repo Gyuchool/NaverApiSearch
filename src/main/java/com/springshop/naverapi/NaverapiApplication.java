@@ -29,7 +29,6 @@ public class NaverapiApplication {
         new SpringApplicationBuilder(NaverapiApplication.class)
                 .properties(APPLICATION_LOCATIONS)
                 .run(args);
-//         SpringApplication.run(NaverapiApplication.class, args);
     }
 
 }
