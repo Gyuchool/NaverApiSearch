@@ -1,4 +1,4 @@
-# NaverApiSearch
+# 여러가지 기능 적용 Repo
 [![Build Status](https://travis-ci.com/Gyuchool/NaverApiSearch.svg?branch=main)](https://travis-ci.com/Gyuchool/NaverApiSearch)
 
 ## springboot+mysql+naverapi 이용해보기
