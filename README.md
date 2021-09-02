@@ -1,5 +1,7 @@
 # 여러가지 기능 적용 Repo
 [![CI](https://github.com/Gyuchool/NaverApiSearch/actions/workflows/main.yml/badge.svg)](https://github.com/Gyuchool/NaverApiSearch/actions/workflows/main.yml)
+[![Build Status](http://3.35.176.6:32789/buildStatus/icon?job=jenkins)](http://3.35.176.6:32789/job/jenkins/)
+
 ## springboot+mysql+naverapi 이용해보기
 Naver Api를 이용하여 제품들을 검색 후, 최저가를 설정하면 그때 '모아보기'창에 등장하여 구매 가능 링크로 넘어가지는 기능
 + 여러가지 기술들 적용 중!!!!!
