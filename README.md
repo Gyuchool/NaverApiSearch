@@ -11,6 +11,7 @@ Naver Api를 이용하여 제품들을 검색 후, 최저가를 설정하면 그
  - travis CI/CD
  - Jenkins CI/CD
  - SMTP
+ - Docker
  - nginx 무중단 배포 (시도중..)
  - 
 
