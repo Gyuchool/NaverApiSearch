@@ -1,9 +1,10 @@
-# NaverApiSearch
-[![Build Status](https://travis-ci.com/Gyuchool/NaverApiSearch.svg?branch=main)](https://travis-ci.com/Gyuchool/NaverApiSearch)
+# 여러가지 기능 적용 Repo
+[![CI](https://github.com/Gyuchool/NaverApiSearch/actions/workflows/main.yml/badge.svg)](https://github.com/Gyuchool/NaverApiSearch/actions/workflows/main.yml)
+[![Build Status](http://3.35.176.6:32789/buildStatus/icon?job=jenkins)](http://3.35.176.6:32789/job/jenkins/)
 
 ## springboot+mysql+naverapi 이용해보기
 Naver Api를 이용하여 제품들을 검색 후, 최저가를 설정하면 그때 '모아보기'창에 등장하여 구매 가능 링크로 넘어가지는 기능
-+ 여러가지 기술들 적용 중
++ 여러가지 기술들 적용 중!!!!!
 
 ## aws ec2를 이용한 배포 성공적 (Ip: http://52.78.203.79/ )(도메인 구입(가비아)은 비싸서 다음에..)
 ![image](https://user-images.githubusercontent.com/60054318/126054268-cf43c2a7-d84f-4910-935a-ce5ed0b73e96.png)
