@@ -1,0 +1,12 @@
+cloud:
+  aws:
+    credentials:
+      profile-name: stratospheric
+    s3:
+      bucket: giron-bucket
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+      auto: false
+
