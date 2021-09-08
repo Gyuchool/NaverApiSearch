@@ -20,15 +20,8 @@ import java.util.Map;
 @SpringBootApplication
 public class NaverapiApplication {
 
+        public static void main(String[] args) {
 
-    public static final String APPLICATION_LOCATIONS = "spring.config.location="
-            + "classpath:application.yml,"
-            + "classpath:application-aws.yml";
-    public static void main(String[] args) {
-
-        new SpringApplicationBuilder(NaverapiApplication.class)
-                .properties(APPLICATION_LOCATIONS)
-                .run(args);
-    }
-
+            SpringApplication.run(NaverapiApplication.class, args);
+        }
 }
