@@ -1,6 +1,8 @@
 package com.springshop.naverapi.aws;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+
 @RequiredArgsConstructor
 @RestController
+@Profile("stratospheric")
 public class S3TestController {
 
     private final S3Uploader s3Uploader;

@@ -6,7 +6,6 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,10 +16,10 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
-@Profile("stratospheric")
 @Slf4j
-@Configuration
+@Component
 @RequiredArgsConstructor
+@Profile("stratospheric")
 public class S3Uploader {
 
     private final AmazonS3Client amazonS3Client;
