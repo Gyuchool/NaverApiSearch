@@ -17,6 +17,10 @@ spring:
       hibernate:
         SQL: debug
         format_sql: true
+cloud:
+  aws:
+    stack:
+      auto: false
 logging:
   level:
     org.hibernate.type.descriptor.sql: trace
