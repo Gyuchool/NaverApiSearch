@@ -13,15 +13,15 @@ permissions:
 
 hooks:
   AfterInstall:
-    - location: stop.sh
+    - location: scripts/stop.sh
       timeout: 60
       runas: ec2-user
   ApplicationStart:
     #- location: scripts/deploy.sh    # ApplicationStart 단계에서 해당 파일을 실행해라
-    - location: start.sh
+    - location: scripts/start.sh
       timeout: 60
       runas: ec2-user
   ValidateService:
-    - location: health.sh
+    - location: scripts/health.sh
       timeout: 60
       runas: ec2-user
