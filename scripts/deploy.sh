@@ -21,4 +21,4 @@ fi
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포"
-nohup java -jar \ -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-real1.yml \ $REPOSITORY/$JAR_NAME 2>&1 &
+nohup java -jar $DEPLOY_JAR >> /home/ec2-user/deploy.log 2>/home/ec2-user/deploy_err.log &
