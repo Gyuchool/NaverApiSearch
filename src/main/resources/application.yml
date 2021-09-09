@@ -20,7 +20,7 @@ spring:
 cloud:
   aws:
     stack:
-      auto=false
+      auto: false
 logging:
   level:
     org.hibernate.type.descriptor.sql: trace
