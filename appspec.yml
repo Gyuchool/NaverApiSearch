@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ec2-user/app/  # EC2 내부 배포 할 위치
+    destination: /home/ec2-user/app/step3/zip/  # EC2 내부 배포 할 위치
     overwrite: yes
 
 permissions:
@@ -12,7 +12,16 @@ permissions:
     group: ec2-user
 
 hooks:
+  AfterInstall:
+    - location: stop.sh
+      timeout: 60
+      runas: ec2-user
   ApplicationStart:
-    - location: scripts/deploy.sh    # ApplicationStart 단계에서 해당 파일을 실행해라
+    #- location: scripts/deploy.sh    # ApplicationStart 단계에서 해당 파일을 실행해라
+    - location: start.sh
+      timeout: 60
+      runas: ec2-user
+  ValidateService:
+    - location: health.sh
       timeout: 60
       runas: ec2-user

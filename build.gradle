@@ -7,6 +7,7 @@ plugins {
 group = 'com.springshop'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+version '1.0.1-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 
 configurations {
     compileOnly {
