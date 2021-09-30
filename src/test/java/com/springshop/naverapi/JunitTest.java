@@ -15,17 +15,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class JunitTest {
+    @RepeatedTest(10)
+    @DisplayName("반복 테스트")
+    void repeatedTest() {
 
-
-    @Test
-    @DisplayName("타임아웃 준수")
-    void timeOutNotExceed(){
-        assertTimeout(ofMinutes(2), ()->Thread.sleep(10));
-    }
-    @Test
-    @DisplayName("타임아웃 초과")
-    public void timeOut(){
-        assertTimeout(ofMillis(10), () -> Thread.sleep(100));
     }
 
+    @RepeatedTest(value = 10, name = "{displayName} 중 {currentRepetition}")
+    @DisplayName("반복 테스트2")
+    void repeatedTest2(){
+
+    }
 }
