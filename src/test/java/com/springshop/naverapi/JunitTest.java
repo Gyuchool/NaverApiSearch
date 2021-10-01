@@ -15,7 +15,7 @@ public class JunitTest {
         Product product = new Product();
         assertAll(
                 () -> assertNotNull(product),
-                () -> assertEquals(product.getMyprice(), 5000),
+                () -> assertEquals(product.getMyprice(), 0),
                 () -> assertTrue(product.getLprice() < 1000, "1000원보다는 비싸야 한다.")
         );
     }
